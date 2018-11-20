@@ -1,0 +1,38 @@
+#include <string>
+#include <malloc.h>
+#include <fstream>
+#include "Source.h"
+using namespace std;
+
+int main()
+{
+
+	string name = "text.txt";
+	{
+		ifstream file;
+		file.open(name);
+		if (file.is_open())
+		{
+			cout << "file is readable" << endl;
+		}
+		else
+		{
+			cout << "File doesnt exist" << endl;
+		}
+
+		while (!file.eof())
+		{
+			string sentence;
+			getline(file, sentence);
+			if (doublenumber(sentence) == true)
+			{
+				cout << sentence;
+			}
+		}
+
+		file.close();
+	}
+
+
+	return 0;
+}
