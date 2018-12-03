@@ -1,9 +1,20 @@
+#include <stdio.h>
+#include <tchar.h>
+#include <iostream>
+#include <cstdlib>
 #include <string>
 #include <malloc.h>
 #include <fstream>
 #include "Source.h"
 using namespace std;
-
+void Exception(string name)
+{
+	fstream file(name);
+	if
+		(!file.is_open()) cout << "Not open\n"; // если не открылся
+	else if
+		(file.peek() == EOF) cout << "File empty\n"; // если первый символ конец файла
+}
 int main()
 {
 
@@ -11,28 +22,18 @@ int main()
 	{
 		ifstream file;
 		file.open(name);
-		if (file.is_open())
-		{
-			cout << "file is readable" << endl;
-		}
-		else
-		{
-			cout << "File doesnt exist" << endl;
-		}
-
+		Exception(name);
 		while (!file.eof())
 		{
-			string sentence;
-			getline(file, sentence);
-			if (doublenumber(sentence) == true)
+			string string;
+			getline(file, string);
+			if (doublenumber(string) == true)
 			{
-				cout << sentence;
+				cout << string;
 			}
 		}
 
 		file.close();
 	}
-
-
 	return 0;
 }
