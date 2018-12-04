@@ -5,35 +5,42 @@
 #include <string>
 #include <malloc.h>
 #include <fstream>
-#include "Source.h"
+
+#include "doublenumber.h"
 using namespace std;
-void Exception(string name)
-{
-	fstream file(name);
-	if
-		(!file.is_open()) cout << "Not open\n"; // если не открылся
-	else if
-		(file.peek() == EOF) cout << "File empty\n"; // если первый символ конец файла
-}
+
+
+
 int main()
 {
 
 	string name = "text.txt";
-	{
+	
 		ifstream file;
-		file.open(name);
-		Exception(name);
-		while (!file.eof())
+		file.exceptions(ifstream::failbit);
+		try
 		{
-			string string;
-			getline(file, string);
-			if (doublenumber(string) == true)
+			file.open(name);
+			while (!file.eof())
 			{
-				cout << string;
+				string string;
+				getline(file, string);
+				if (doublenumber(string) == true)
+				{
+					cout << string;
+					cout << "\n";
+				}
 			}
-		}
 
-		file.close();
-	}
+			file.close();
+			
+		}
+		catch (const ifstream::failure& exc)
+		{
+			std::cout << "Error!" <<exc.what()<< std::endl;
+		}
+		
+		
+	
 	return 0;
 }
